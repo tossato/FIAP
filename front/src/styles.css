@@ -1,0 +1,16 @@
+html{
+  color: #262626!important;
+}
+
+.markTitle{
+  border-left: 6px solid #FEAF00;
+  text-transform: uppercase;
+}
+
+.bg-orange{
+  background-color: #FEAF00;
+}
+
+.bg-linear-orange{
+  background: linear-gradient(60deg, #FEAF00, #F8D442);
+}
