@@ -1,0 +1,709 @@
+info:
+  title: FIAP-Avaliacao
+  description: ''
+  version: 1.0.0
+tags:
+  - name: Aluno
+  - name: Matricula
+  - name: Turma
+  - name: Usuario
+  - name: createAluno
+  - name: listAlunos
+  - name: listaAlunoId
+  - name: updateAluno
+  - name: deleteAluno
+  - name: inactivateAluno
+  - name: activateAluno
+paths:
+  /api/aluno:
+    post:
+      summary: Cria um aluno
+      deprecated: false
+      description: ''
+      tags:
+        - Aluno
+        - Aluno
+        - createAluno
+      parameters:
+        - name: usuario
+          in: query
+          description: ''
+          required: true
+          type: string
+          x-example: R123
+        - name: nome
+          in: query
+          description: ''
+          required: true
+          type: string
+          x-example: pamela tossato
+        - name: data_nascimento
+          in: query
+          description: ''
+          required: true
+          type: string
+          x-example: '1996-07-09'
+        - name: status
+          in: query
+          description: ''
+          required: true
+          type: string
+          x-example: ativo
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+    get:
+      summary: Lista todos os Alunos
+      deprecated: false
+      description: ''
+      tags:
+        - Aluno
+        - listAlunos
+      parameters:
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+  /api/aluno/3:
+    get:
+      summary: Lista um Aluno pelo id
+      deprecated: false
+      description: ''
+      tags:
+        - Aluno
+        - listaAlunoId
+      parameters:
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+  /api/aluno/1:
+    put:
+      summary: Atualiza o aluno
+      deprecated: false
+      description: ''
+      tags:
+        - Aluno
+        - Aluno
+        - updateAluno
+      parameters:
+        - name: usuario
+          in: query
+          description: ''
+          required: false
+          type: string
+          x-example: R123
+        - name: nome
+          in: query
+          description: ''
+          required: false
+          type: string
+          x-example: pamela Tossato
+        - name: data_nascimento
+          in: query
+          description: ''
+          required: false
+          type: string
+          x-example: '1996-07-09'
+        - name: status
+          in: query
+          description: ''
+          required: false
+          type: string
+          x-example: ativo
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+    delete:
+      summary: Deleta o Aluno
+      deprecated: false
+      description: ''
+      tags:
+        - Aluno
+        - Aluno
+        - deleteAluno
+      parameters:
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+  /api/aluno/1/inactivate:
+    patch:
+      summary: Inativa o Aluno
+      deprecated: false
+      description: ''
+      tags:
+        - Aluno
+        - Aluno
+        - inactivateAluno
+      parameters:
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+  /api/aluno/1/activate:
+    patch:
+      summary: Ativa o Aluno
+      deprecated: false
+      description: ''
+      tags:
+        - Aluno
+        - Aluno
+        - activateAluno
+      parameters:
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+  /aluno/count:
+    get:
+      summary: Contagem dos alunos
+      deprecated: false
+      description: ''
+      tags:
+        - Aluno
+      parameters:
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+  /matricula/count:
+    get:
+      summary: Contagem das matriculas
+      deprecated: false
+      description: ''
+      tags:
+        - Matricula
+        - Matricula
+        - listAlunos
+      parameters:
+        - name: turma
+          in: query
+          description: ''
+          required: false
+          type: string
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+  /matricula:
+    get:
+      summary: Lista todas as matriculas
+      deprecated: false
+      description: ''
+      tags:
+        - Matricula
+        - Matricula
+        - listAlunos
+      parameters:
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+  /api/matricula:
+    post:
+      summary: Cria uma relacao de matricula
+      deprecated: false
+      description: ''
+      tags:
+        - Matricula
+        - Matricula
+        - createAluno
+      parameters:
+        - name: id_aluno
+          in: query
+          description: ''
+          required: true
+          type: integer
+          x-example: 1
+        - name: id_turma
+          in: query
+          description: ''
+          required: true
+          type: integer
+          x-example: 1
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+  /matricula/1:
+    delete:
+      summary: Deleta a matricula
+      deprecated: false
+      description: ''
+      tags:
+        - Matricula
+        - Matricula
+        - deleteAluno
+      parameters:
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+  /turma/1:
+    delete:
+      summary: Deleta o Aluno
+      deprecated: false
+      description: ''
+      tags:
+        - Turma
+        - Turma
+        - deleteAluno
+      parameters:
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+    put:
+      summary: Atualiza a turma
+      deprecated: false
+      description: ''
+      tags:
+        - Turma
+        - Turma
+        - updateAluno
+      parameters:
+        - name: nome
+          in: query
+          description: ''
+          required: false
+          type: string
+          x-example: ADS
+        - name: descricao
+          in: query
+          description: ''
+          required: false
+          type: string
+          x-example: Curso Análise de Sistema
+        - name: tipo
+          in: query
+          description: ''
+          required: false
+          type: string
+          x-example: Presencial
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+    get:
+      summary: Seleciona uma turma
+      deprecated: false
+      description: ''
+      tags:
+        - Turma
+        - Turma
+        - listAlunos
+      parameters:
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+  /turma:
+    post:
+      summary: Cria uma turma
+      deprecated: false
+      description: ''
+      tags:
+        - Turma
+        - Turma
+        - createAluno
+      parameters:
+        - name: nome
+          in: query
+          description: ''
+          required: true
+          type: string
+          x-example: ADS
+        - name: descricao
+          in: query
+          description: ''
+          required: true
+          type: string
+          x-example: Curso análise de sistema
+        - name: tipo
+          in: query
+          description: ''
+          required: true
+          type: string
+          x-example: EAD
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+    get:
+      summary: Lista todas as Turmas
+      deprecated: false
+      description: ''
+      tags:
+        - Turma
+        - Turma
+        - listAlunos
+      parameters:
+        - name: turma
+          in: query
+          description: ''
+          required: false
+          type: string
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+  /turma/count:
+    get:
+      summary: Contagem das turmas
+      deprecated: false
+      description: ''
+      tags:
+        - Turma
+        - Turma
+        - listAlunos
+      parameters:
+        - name: turma
+          in: query
+          description: ''
+          required: false
+          type: string
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+  /user:
+    post:
+      summary: Criar novo usuário admin
+      deprecated: false
+      description: ''
+      tags:
+        - Usuario
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: name
+              email:
+                type: string
+              password:
+                type: string
+              password_confirmation:
+                type: string
+            required:
+              - name
+              - email
+              - password
+              - password_confirmation
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      consumes:
+        - application/json
+      produces:
+        - application/json
+    get:
+      summary: Retorna o token e o usuário logado
+      deprecated: false
+      description: ''
+      tags:
+        - Usuario
+      parameters:
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+  /user/login:
+    post:
+      summary: Login do usuário
+      deprecated: false
+      description: ''
+      tags:
+        - Usuario
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+            required:
+              - email
+              - password
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      consumes:
+        - application/json
+      produces:
+        - application/json
+  /user/logout:
+    post:
+      summary: Logout do usuário
+      deprecated: false
+      description: ''
+      tags:
+        - Usuario
+      parameters:
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          type: string
+          x-example: Bearer {{token}}
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          schema:
+            type: object
+            properties: {}
+      security: []
+      produces:
+        - application/json
+swagger: '2.0'
+definitions: {}
+securityDefinitions: {}
+x-components: {}

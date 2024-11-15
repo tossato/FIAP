@@ -1,0 +1,170 @@
+<div class="container-fluid d-flex p-0">
+  <app-menu></app-menu>
+  <div *ngIf="isLoading" class="loader">
+    <div class="spinner"></div>
+    Carregando...
+  </div>
+  <main class="flex-grow-1 bg-light-gray">
+
+    <div class="row m-0 justify-content-end p-3 bg-white">
+      <div class="col-6">
+        <div class="input-group justify-content-end">
+          <form class="d-flex align-items-center" [formGroup]="searchForm" (ngSubmit)="pesquisar()">
+            <input type="text" class="form-control" formControlName="nome" placeholder="Pesquisar por nome...">
+            <input type="text" class="form-control mx-2" formControlName="descricao" placeholder="Pesquisar por descrição...">
+            <input type="text" class="form-control me-2" formControlName="tipo" placeholder="Pesquisar por tipo...">
+            <button class="btn bg-orange input-group-text" id="inputSearch">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_21_359)">
+                  <path d="M13.9043 13.1687L10.377 9.64141C10.3141 9.57852 10.232 9.5457 10.1445 9.5457H9.86289C10.8008 8.53125 11.375 7.17773 11.375 5.6875C11.375 2.5457 8.8293 0 5.6875 0C2.5457 0 0 2.5457 0 5.6875C0 8.8293 2.5457 11.375 5.6875 11.375C7.17773 11.375 8.53125 10.8008 9.5457 9.86562V10.1445C9.5457 10.232 9.58125 10.3141 9.64141 10.377L13.1687 13.9043C13.2973 14.0328 13.5051 14.0328 13.6336 13.9043L13.9043 13.6336C14.0328 13.5051 14.0328 13.2973 13.9043 13.1687ZM5.6875 10.5C3.02695 10.5 0.875 8.34805 0.875 5.6875C0.875 3.02695 3.02695 0.875 5.6875 0.875C8.34805 0.875 10.5 3.02695 10.5 5.6875C10.5 8.34805 8.34805 10.5 5.6875 10.5Z" fill="#FFF"/>
+                </g>
+                <defs>
+                  <clipPath id="clip0_21_359">
+                    <rect width="14" height="14" fill="white"/>
+                  </clipPath>
+                </defs>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid px-4">
+      <div class="row m-0 py-3 header-turmas">
+        <div class="col-6">
+          <h3>Turmas</h3>
+        </div>
+        <div class="col-6 text-end">
+          <a class="btn bg-orange text-white" (click)="openModal('cadastroTurma')">Adicionar nova turma</a>
+        </div>
+      </div>
+
+      <div class="row mt-4 table-header">
+        <div class="col-3 text-center">Nome</div>
+        <div class="col-4 text-center">Descrição</div>
+        <div class="col-2 text-center">Tipo</div>
+        <div class="col-3 text-center"></div>
+      </div>
+
+      <div *ngFor="let turma of turmas" class="row mt-4 bg-white rounded-3 h-80px align-items-center">
+        <div class="col-3 text-center">{{ turma.nome }}</div>
+        <div class="col-4 text-center">{{ turma.descricao }}</div>
+        <div class="col-2 text-center">{{ turma.tipo }}</div>
+        <div class="col-3 text-center">
+          <a class="btn me-4" title="Informações" [routerLink]="['turma/' + turma.id]">
+            <svg xmlns="http://www.w3.org/2000/svg" height="20" width="30" viewBox="0 0 576 512">
+              <path fill="#feaf00" d="M512 80c8.8 0 16 7.2 16 16l0 320c0 8.8-7.2 16-16 16L64 432c-8.8 0-16-7.2-16-16L48 96c0-8.8 7.2-16 16-16l448 0zM64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zM208 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128zm-32 32c-44.2 0-80 35.8-80 80c0 8.8 7.2 16 16 16l192 0c8.8 0 16-7.2 16-16c0-44.2-35.8-80-80-80l-64 0zM376 144c-13.3 0-24 10.7-24 24s10.7 24 24 24l80 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-80 0zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24l80 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-80 0z"/>
+            </svg>
+          </a>
+          <a class="btn me-4" (click)="openModalEditarTurma(turma)">
+            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18.3033 2.08777L16.9113 0.695801C16.4478 0.231934 15.8399 0 15.2321 0C14.6242 0 14.0164 0.231934 13.5525 0.69543L0.475916 13.772L0.00462689 18.0107C-0.0547481 18.5443 0.365701 19 0.88783 19C0.920858 19 0.953885 18.9981 0.987654 18.9944L5.22332 18.5265L18.3036 5.44617C19.231 4.51881 19.231 3.01514 18.3033 2.08777ZM4.67818 17.3924L1.2259 17.775L1.61035 14.3175L11.4031 4.52475L14.4747 7.59629L4.67818 17.3924ZM17.4639 4.60676L15.3141 6.7565L12.2426 3.68496L14.3923 1.53521C14.6164 1.31107 14.9148 1.1875 15.2321 1.1875C15.5494 1.1875 15.8474 1.31107 16.0719 1.53521L17.4639 2.92719C17.9266 3.39031 17.9266 4.14363 17.4639 4.60676Z" fill="#FEAF00"/>
+            </svg>
+          </a>
+          <a class="btn" (click)="deletarTurma(turma.id)">
+            <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.285713 2.25H4L5.2 0.675C5.35968 0.465419 5.56674 0.295313 5.80478 0.178154C6.04281 0.0609948 6.30529 0 6.57143 0L9.42857 0C9.69471 0 9.95718 0.0609948 10.1952 0.178154C10.4333 0.295313 10.6403 0.465419 10.8 0.675L12 2.25H15.7143C15.7901 2.25 15.8627 2.27963 15.9163 2.33238C15.9699 2.38512 16 2.45666 16 2.53125V3.09375C16 3.16834 15.9699 3.23988 15.9163 3.29262C15.8627 3.34537 15.7901 3.375 15.7143 3.375H15.0393L13.8536 16.4637C13.8152 16.8833 13.6188 17.2737 13.3029 17.558C12.987 17.8423 12.5745 17.9999 12.1464 18H3.85357C3.42554 17.9999 3.01302 17.8423 2.69711 17.558C2.38121 17.2737 2.18477 16.8833 2.14643 16.4637L0.960713 3.375H0.285713C0.209937 3.375 0.137264 3.34537 0.083683 3.29262C0.0301008 3.23988 0 3.16834 0 3.09375V2.53125C0 2.45666 0.0301008 2.38512 0.083683 2.33238C0.137264 2.27963 0.209937 2.25 0.285713 2.25ZM9.88571 1.35C9.8323 1.28034 9.76324 1.22379 9.68393 1.18475C9.60463 1.14572 9.51723 1.12527 9.42857 1.125H6.57143C6.48277 1.12527 6.39537 1.14572 6.31606 1.18475C6.23676 1.22379 6.1677 1.28034 6.11429 1.35L5.42857 2.25H10.5714L9.88571 1.35ZM3.28571 16.3617C3.29748 16.5019 3.36245 16.6325 3.46768 16.7277C3.57292 16.8228 3.7107 16.8754 3.85357 16.875H12.1464C12.2893 16.8754 12.4271 16.8228 12.5323 16.7277C12.6376 16.6325 12.7025 16.5019 12.7143 16.3617L13.8929 3.375H2.10714L3.28571 16.3617Z" fill="#FEAF00"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <footer id="pagination" class="d-flex justify-content-center align-items-center">
+        <a (click)="prevPage()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+            <path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160zm352-160l-160 160c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L301.3 256 438.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0z"/>
+          </svg>
+        </a>
+        <div class="d-flex">
+          <p *ngFor="let page of getPages()" (click)="setPage(page)" [ngClass]="{'current': page === currentPage}">{{page}}</p>
+        </div>
+        <a (click)="nextPage()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+            <path d="M470.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 256 265.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160zm-352 160l160-160c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L210.7 256 73.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z"/>
+          </svg>
+        </a>
+      </footer>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" #cadastroTurma data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cadastrarTurmaLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body d-flex flex-column">
+            <div class="row m-0 justify-content-center">
+              <div class="col-10 my-4">
+                <h3 class="markTitle ps-2">Adicionar Turma</h3>
+              </div>
+            </div>
+            <div class="row justify-content-center m-0">
+              <div class="col-10 mb-5">
+                <form class="mt-3" [formGroup]="cadastroForm" (ngSubmit)="cadastrarTurma()">
+                  <div class="mb-3">
+                    <label for="inputNome" class="form-label">Turma</label>
+                    <input type="text" class="form-control" id="inputNome" formControlName="nome">
+                    <small class="text-danger ms-1">{{erros.nome}}</small>
+                  </div>
+                  <div class="mb-3">
+                    <label for="inputDesc" class="form-label">Descrição</label>
+                    <input type="text" class="form-control" id="inputDesc" formControlName="descricao">
+                    <small class="text-danger ms-1">{{erros.descricao}}</small>
+                  </div>
+                  <div class="mb-5">
+                    <label for="inputTipo" class="form-label">Tipo</label>
+                    <input type="text" class="form-control" id="inputTipo" formControlName="tipo">
+                    <small class="text-danger ms-1">{{erros.tipo}}</small>
+                  </div>
+                  <div class="d-flex gap-2 mt-3">
+                    <button type="submit" class="btn bg-orange text-white w-50">Cadastrar</button>
+                    <div class="btn bg-white w-50 border-orange btn-cancel text-orange" (click)="closeModal()">Cancelar</div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" #editTurma data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editarAlunoLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body d-flex flex-column">
+            <div class="row m-0 justify-content-center">
+              <div class="col-10 my-4">
+                <h3 class="markTitle ps-2">Editar Turma</h3>
+              </div>
+            </div>
+            <div class="row justify-content-center m-0">
+              <div class="col-10 mb-5">
+                <form class="mt-3" [formGroup]="editarForm" (ngSubmit)="editarTurma(idTurmaSelecionada)">
+                  <div class="mb-3">
+                    <label for="inputNome" class="form-label">Turma</label>
+                    <input type="text" class="form-control" formControlName="nome">
+                    <small class="text-danger ms-1">{{erros.nome}}</small>
+                  </div>
+                  <div class="mb-3">
+                    <label for="inputDesc" class="form-label">Descrição</label>
+                    <input type="text" class="form-control" formControlName="descricao">
+                    <small class="text-danger ms-1">{{erros.descricao}}</small>
+                  </div>
+                  <div class="mb-5">
+                    <label for="inputTipo" class="form-label">Tipo</label>
+                    <input type="text" class="form-control" formControlName="tipo">
+                    <small class="text-danger ms-1">{{erros.tipo}}</small>
+                  </div>
+                  <div class="d-flex gap-2 mt-3">
+                    <button type="submit" class="btn bg-orange text-white w-50">Cadastrar</button>
+                    <div class="btn bg-white w-50 border-orange btn-cancel text-orange" (click)="closeModal()">Cancelar</div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

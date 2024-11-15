@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('alunos', function (Blueprint $table) {
             $table->id();
-            $table->string('usuario', length: 20);
+            $table->integer('usuario')->unique();
             $table->string('nome', length: 100);
-            $table->string('sobrenome', length: 100);
             $table->date('data_nascimento');
             $table->string('status', length:10);
             $table->timestamps();

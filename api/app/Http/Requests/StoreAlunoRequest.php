@@ -23,9 +23,17 @@ class StoreAlunoRequest extends FormRequest
     {
         return [
             "nome" => "required|min:3",
-            "sobrenome" => "required|min:3",
             "data_nascimento" => "required|date",
-            "status" => "required|in:Ativo,Inativo",
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nome.required' => 'O campo nome é obrigatório.',
+            'nome.min' => 'O nome deve ter no mínimo 3 caracteres.',
+            'data_nascimento.required' => 'A data de nascimento é obrigatória.',
+            'data_nascimento.date' => 'A data de nascimento precisa ser uma data válida.',
         ];
     }
 }

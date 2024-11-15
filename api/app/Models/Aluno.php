@@ -14,12 +14,12 @@ class Aluno extends Model
     protected $fillable = [
         'usuario',
         'nome',
-        'sobrenome',
-        'data_nascimento'
+        'data_nascimento',
+        'status'
     ];
 
     public function turmas()
     {
-        return $this->belongsToMany(Turma::class, 'matriculas', 'id_aluno', 'id_turmas');
+        return $this->belongsToMany(Turma::class, 'matriculas', 'id_aluno', 'id_turma');
     }
 }

@@ -22,7 +22,18 @@ class UpdateTurmaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nome' => 'required',
+            'descricao' => 'required',
+            'tipo' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nome.required' => 'O campo nome é obrigatório.',
+            'descricao.required' => 'A descrição é obrigatória.',
+            'tipo.required' => 'O campo tipo é obrigatório.',
         ];
     }
 }

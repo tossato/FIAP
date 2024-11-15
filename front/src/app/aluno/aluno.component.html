@@ -1,0 +1,93 @@
+<div class="container-fluid d-flex p-0">
+  <app-menu></app-menu>
+  <div *ngIf="isLoading" class="loader">
+    <div class="spinner"></div>
+    Carregando...
+  </div>
+  <main class="flex-grow-1 bg-light-gray">
+    <div class="container-fluid px-4">
+      <div class="row m-0 py-3 header-aluno">
+        <div class="col-6">
+          <h2>{{ aluno.nome }}</h2>
+          <p class="mb-1 mt-3">Usuário: {{ aluno.usuario }}</p>
+          <p class="mb-1">Data de nascimento: {{ aluno.data_nascimento }}</p>
+          <p>Status: {{ aluno.status }}</p>
+        </div>
+        <div class="col-6 text-end">
+          <button class="btn bg-orange text-white" (click)="openModal('matricular')" >Matricular aluno</button>
+        </div>
+      </div>
+
+      <div class="row mt-4 mx-0">
+        <div class="col-6">
+          <h3>Turmas Matriculadas</h3>
+        </div>
+      </div>
+
+      <div class="row mx-0 mt-4 table-header">
+        <div class="col-3 text-center">Nome</div>
+        <div class="col-4 text-center">Descrição</div>
+        <div class="col-2 text-center">Tipo</div>
+        <div class="col-3 text-center"></div>
+      </div>
+      <div *ngFor="let turma of aluno.turmas" class="row mx-0 mt-4 bg-white rounded-3 h-80px align-items-center">
+        <div class="col-3 text-center">{{ turma.nome }}</div>
+        <div class="col-4 text-center">{{ turma.descricao }}</div>
+        <div class="col-2 text-center">{{ turma.tipo }}</div>
+        <div class="col-3 text-center">
+          <a class="btn" (click)="deletarMatricula(turma.id)">
+            <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.285713 2.25H4L5.2 0.675C5.35968 0.465419 5.56674 0.295313 5.80478 0.178154C6.04281 0.0609948 6.30529 0 6.57143 0L9.42857 0C9.69471 0 9.95718 0.0609948 10.1952 0.178154C10.4333 0.295313 10.6403 0.465419 10.8 0.675L12 2.25H15.7143C15.7901 2.25 15.8627 2.27963 15.9163 2.33238C15.9699 2.38512 16 2.45666 16 2.53125V3.09375C16 3.16834 15.9699 3.23988 15.9163 3.29262C15.8627 3.34537 15.7901 3.375 15.7143 3.375H15.0393L13.8536 16.4637C13.8152 16.8833 13.6188 17.2737 13.3029 17.558C12.987 17.8423 12.5745 17.9999 12.1464 18H3.85357C3.42554 17.9999 3.01302 17.8423 2.69711 17.558C2.38121 17.2737 2.18477 16.8833 2.14643 16.4637L0.960713 3.375H0.285713C0.209937 3.375 0.137264 3.34537 0.083683 3.29262C0.0301008 3.23988 0 3.16834 0 3.09375V2.53125C0 2.45666 0.0301008 2.38512 0.083683 2.33238C0.137264 2.27963 0.209937 2.25 0.285713 2.25ZM9.88571 1.35C9.8323 1.28034 9.76324 1.22379 9.68393 1.18475C9.60463 1.14572 9.51723 1.12527 9.42857 1.125H6.57143C6.48277 1.12527 6.39537 1.14572 6.31606 1.18475C6.23676 1.22379 6.1677 1.28034 6.11429 1.35L5.42857 2.25H10.5714L9.88571 1.35ZM3.28571 16.3617C3.29748 16.5019 3.36245 16.6325 3.46768 16.7277C3.57292 16.8228 3.7107 16.8754 3.85357 16.875H12.1464C12.2893 16.8754 12.4271 16.8228 12.5323 16.7277C12.6376 16.6325 12.7025 16.5019 12.7143 16.3617L13.8929 3.375H2.10714L3.28571 16.3617Z" fill="#FEAF00"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <footer id="pagination" class="d-flex justify-content-center align-items-center">
+        <a (click)="prevPage()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+            <path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160zm352-160l-160 160c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L301.3 256 438.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0z"/>
+          </svg>
+        </a>
+        <div class="d-flex">
+          <p *ngFor="let page of getPages()" (click)="setPage(page)" [ngClass]="{'current': page == currentPage}">{{page}}</p>
+        </div>
+        <a (click)="nextPage()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+            <path d="M470.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 256 265.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160zm-352 160l160-160c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L210.7 256 73.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z"/>
+          </svg>
+        </a>
+      </footer>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" #matricularAluno data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="matricularAlunoLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body d-flex flex-column">
+            <div class="row m-0 justify-content-center">
+              <div class="col-10 my-4">
+                <h3 class="markTitle ps-2">Matricular Aluno</h3>
+              </div>
+            </div>
+            <div class="row justify-content-center m-0">
+              <div class="col-10 mb-5">
+                <small class="text-danger ms-1">{{ erros.id_aluno }}</small>
+                <form class="mt-3" [formGroup]="cadastroForm" (ngSubmit)="matricular(aluno.id)">
+                  <select class="form-select" size="10" formControlName="id_turma">
+                    <option *ngFor="let turma of turmas" value="{{ turma.id }}">{{ turma.nome }} - {{ turma.descricao }} - {{ turma.tipo }}</option>
+                  </select>
+                  <div class="d-flex gap-2 mt-3">
+                    <button type="submit" class="btn bg-orange text-white w-50">Matricular</button>
+                    <div class="btn bg-white w-50 border-orange btn-cancel text-orange" data-bs-dismiss="modal">Cancelar</div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>

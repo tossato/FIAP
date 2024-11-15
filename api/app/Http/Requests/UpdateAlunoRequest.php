@@ -22,7 +22,18 @@ class UpdateAlunoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "nome" => "required|min:3",
+            "data_nascimento" => "required|date",
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nome.required' => 'O campo nome é obrigatório.',
+            'nome.min' => 'O nome deve ter no mínimo 3 caracteres.',
+            'data_nascimento.required' => 'A data de nascimento é obrigatória.',
+            'data_nascimento.date' => 'A data de nascimento precisa ser uma data válida.',
         ];
     }
 }

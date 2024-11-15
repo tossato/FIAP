@@ -5,28 +5,57 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAlunoRequest;
 use App\Http\Requests\UpdateAlunoRequest;
 use App\Models\Aluno;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\DB;
 
 class AlunoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function showAll(Aluno $aluno)
     {
-        return $aluno->all();
+        $where = "1 = 1 ";
+        $params = [];
+
+        $paginate = request()->query('page');
+        $searchByNome = request()->query('nome');
+        $searchByUsuario = request()->query('usuario');
+        $searchByStatus = request()->query('status');
+
+        if($searchByNome){
+            $where .= "AND LOWER(nome) LIKE ? ";
+            $params[] = strtolower("%".$searchByNome."%");
+        }
+
+        if($searchByUsuario){
+            $where .= "AND usuario LIKE ? ";
+            $params[] = "%".$searchByUsuario."%";
+        }
+
+        if($searchByStatus){
+            $where .= "AND status = ? ";
+            $params[] = $searchByStatus;
+        }
+
+        if($paginate){
+            return $aluno->orderBy('nome', 'asc')->whereRaw($where, $params)->paginate(5);
+        }
+        
+        return $aluno->orderBy('nome', 'asc')->whereRaw($where, $params)->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function countAlunos(Aluno $aluno)
+    {
+        return Aluno::count();
+    }
+
     public function store(StoreAlunoRequest $request, Aluno $aluno)
     {
-        $aluno->usuario = $request->get("usuario");
+        $ultimoAluno = $aluno->latest()->first();
+        $usuarioAluno = $ultimoAluno ? $ultimoAluno->usuario + 1 : 100000;
+
+        $aluno->usuario = $usuarioAluno;
         $aluno->nome = $request->get("nome");
-        $aluno->sobrenome = $request->get("sobrenome");
         $aluno->data_nascimento = $request->get("data_nascimento");
-        $aluno->status = $request->get("status");
+        $aluno->status = 'ativo';
 
         $response = $aluno->save();
 
@@ -41,20 +70,52 @@ class AlunoController extends Controller
         ], 400);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function findById(Aluno $aluno, int $id)
     {
-        return $aluno->find($id);
+        $aluno = DB::selectOne("SELECT * FROM alunos WHERE id = ?", [$id]);
+
+
+        if(!$aluno){
+            return response()->json(['message' => 'Aluno não encontrada'], 404);
+        }
+
+        $totalTurmas = DB::selectOne('
+            SELECT COUNT(*) as total FROM matriculas 
+            INNER JOIN turmas ON matriculas.id_turma = turmas.id 
+            WHERE matriculas.id_aluno = ?',
+            [$id]
+        );
+
+        $perPage = request()->query('per_page', 5);
+        $page = request()->query('page', 1);
+        $offset = ($page - 1) * $perPage;
+
+        $turmas = DB::select('
+            SELECT turmas.* FROM matriculas 
+            INNER JOIN turmas ON matriculas.id_turma = turmas.id 
+            WHERE matriculas.id_aluno = ? 
+            ORDER BY turmas.nome ASC 
+            LIMIT ? OFFSET ?',
+            [$id, $perPage, $offset]
+        );
+
+        $response = [
+            'nome' => $aluno->nome,
+            'usuario' => $aluno->usuario,
+            'data_nascimento' => $aluno->data_nascimento,
+            'status' => $aluno->status,
+            'turmas' => $turmas,
+            'current_page' => $page,
+            'last_page' => ceil($totalTurmas->total / $perPage),
+            'per_page' => $perPage
+        ];
+
+        return response()->json($response, 200);
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateAlunoRequest $request, Aluno $aluno, int $id)
     {
+        $request->validated();
         $alunoSelecionado = $aluno->find($id);
 
         $alunoSelecionado->fill($request->all());
@@ -107,9 +168,6 @@ class AlunoController extends Controller
         ], 400);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Aluno $aluno, int $id)
     {
         $alunoSelecionado = $aluno->find($id);

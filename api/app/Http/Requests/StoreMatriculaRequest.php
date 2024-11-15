@@ -24,6 +24,18 @@ class StoreMatriculaRequest extends FormRequest
         return [
             'id_aluno' => 'required|exists:alunos,id',
             'id_turma' => 'required|exists:turmas,id',
+            'id_aluno' => 'unique:matriculas,id_aluno,NULL,id,id_turma,' . $this->id_turma,
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'id_aluno.required' => 'O campo aluno é obrigatório.',
+            'id_aluno.exists' => 'O aluno informado não está cadastrado.',
+            'id_aluno.unique' => 'Essa combinação de aluno e turma já está cadastrada.',
+            'id_turma.required' => 'O campo turma é obrigatório.',
+            'id_turma.exists' => 'A campo turma é obrigatório.',
         ];
     }
 }

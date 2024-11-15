@@ -2,9 +2,25 @@ html{
   color: #262626!important;
 }
 
+main{
+  position: relative;
+}
+
+app-menu{
+  width: 16%;
+}
+
 .markTitle{
   border-left: 6px solid #FEAF00;
   text-transform: uppercase;
+}
+
+.text-orange{
+  color:#FEAF00;
+}
+
+.border-orange{
+  border-color: #FEAF00;
 }
 
 .bg-orange{
@@ -13,4 +29,117 @@ html{
 
 .bg-linear-orange{
   background: linear-gradient(60deg, #FEAF00, #F8D442);
+}
+
+.bg-bege{
+  background-color: #F2EAE1;
+}
+
+.bg-light-blue{
+  background-color: #F0F9FF;
+}
+
+.bg-light-pink{
+  background-color: #FEF6FB;
+}
+
+.bg-light-gray{
+  background-color: #F8F8F8;
+}
+
+.w-16{
+  width: 16%!important;
+}
+
+.h-100vh{
+  height: 100vh;
+}
+
+.h-80px{
+  height: 80px;
+}
+
+.active{
+  background-color: #FEAF00!important;
+  border: none;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+button:hover{
+  border-color: #FEAF00!important;
+  color: #262626!important;
+
+  svg{
+    path{
+      fill: #262626!important;
+    }
+  }
+}
+
+a.btn:hover{
+  border-color: #FEAF00!important;
+  color: #262626!important;
+  fill: #262626!important;
+}
+
+.btn-cancel:hover{
+  background-color: #FEAF00!important;
+  border:none!important;
+  color: #FFF!important;
+}
+
+.loader {
+  font-size: 20px;
+  font-weight: bold;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100vw;
+  height: 100vh;
+  z-index: 1090;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #FEAF00;
+}
+
+.loader-button{
+  font-size: 20px;
+  color: #FEAF00;
+  text-align: right;
+  margin: 0 !important;
+  float: right;
+}
+
+.spinner {
+  border: 5px solid rgba(255, 255, 255, 0.1);
+  border-top: 5px solid #FEAF00;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1.5s linear infinite;
+  margin: 10px auto;
+}
+
+.spinner-white{
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top: 5px solid #FFF;
+}
+
+.spinner-blue{
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top: 5px solid #74C1ED;
+}
+
+.spinner-pink{
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top: 5px solid #EE95C5;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

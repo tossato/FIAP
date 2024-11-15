@@ -1,0 +1,47 @@
+.header-alunos{
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.table-header{
+  color: #ACACAC;
+}
+
+#inputSearch:hover svg g path{
+  fill: #FEAF00!important;
+}
+
+#pagination{
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+
+
+  div{
+    display: flex;
+    justify-content: center;
+    width: 10rem;
+    align-items: center;
+    height: 50px;
+    margin: 0 10px;
+
+    input{
+      width: 40px;
+      text-align: center;
+    }
+
+    p{
+      margin: 0 5px;
+      width: 40px;
+      text-align: center;
+      border: 2px solid #FEAF00;
+      border-radius: 5px;
+
+      &.current{
+        color: #FFF;
+        background-color: #FEAF00;
+      }
+    }
+  }
+}
+

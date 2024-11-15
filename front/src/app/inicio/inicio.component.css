@@ -1,0 +1,11 @@
+.card-60w{
+  width: 80%;
+}
+
+.card-menu-info{
+  border: none;
+  p{
+    font-size: 2rem;
+    margin-bottom: 0;
+  }
+}

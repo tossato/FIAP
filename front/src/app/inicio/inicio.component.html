@@ -1,0 +1,62 @@
+<div class="container-fluid d-flex p-0">
+  <app-menu></app-menu>
+  <main class="flex-grow-1">
+    <h4 class="text-end py-3 pe-5"><strong>Bem Vindo!!</strong></h4>
+
+    <div class="row p-0 mx-0 mt-5">
+      <div class="col-md-4 cursor-pointer" (click)="redirecionar('lista-alunos')">
+        <div class="card card-60w mx-auto p-3 card-menu-info bg-linear-orange">
+          <svg width="41" height="34" viewBox="0 0 41 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.6746 2.125C25.5188 2.125 29.4537 5.45859 29.4537 9.5625C29.4537 13.6664 25.5188 17 20.6746 17C15.8304 17 11.8954 13.6664 11.8954 9.5625C11.8954 5.45859 15.8304 2.125 20.6746 2.125ZM30.7079 23.375C34.8545 23.375 38.2329 26.2371 38.2329 29.75V31.875H3.11624V29.75C3.11624 26.2371 6.49466 23.375 10.6412 23.375C17.304 23.375 15.9166 24.4375 20.6746 24.4375C25.4482 24.4375 24.0373 23.375 30.7079 23.375ZM20.6746 0C14.4429 0 9.38708 4.2832 9.38708 9.5625C9.38708 14.8418 14.4429 19.125 20.6746 19.125C26.9062 19.125 31.9621 14.8418 31.9621 9.5625C31.9621 4.2832 26.9062 0 20.6746 0ZM30.7079 21.25C23.4651 21.25 25.1425 22.3125 20.6746 22.3125C16.2223 22.3125 17.8762 21.25 10.6412 21.25C5.09939 21.25 0.60791 25.0551 0.60791 29.75V31.875C0.60791 33.0504 1.72882 34 3.11624 34H38.2329C39.6203 34 40.7412 33.0504 40.7412 31.875V29.75C40.7412 25.0551 36.2498 21.25 30.7079 21.25Z" fill="white"/>
+          </svg>
+          <div class="card-body mt-4 p-1">
+            <h5 class="card-title mb-4 text-white">Alunos</h5>
+            <p *ngIf="isLoadingAluno; else buildAluno" class="loader-button spinner spinner-white"></p>
+            <ng-template #buildAluno class="text-end">
+              <p class="text-end">{{ qtdAlunos }}</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 cursor-pointer" (click)="redirecionar('lista-turmas')">
+        <div class="card card-60w mx-auto p-3 card-menu-info bg-light-blue">
+          <svg width="57" height="30" viewBox="0 0 57 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M54.5435 7.42895L31.1612 1.06989C29.5897 0.643127 27.9406 0.643127 26.3691 1.06989L2.98677 7.42895C1.49471 7.83492 0.529419 8.94227 0.529419 10.25C0.529419 11.5577 1.49471 12.6651 2.98589 13.0711L5.60736 13.7836C5.31618 14.2422 5.10089 14.7358 4.9606 15.2531C4.01736 15.6375 3.35295 16.4339 3.35295 17.375C3.35295 18.3198 4.02089 19.1206 4.9703 19.5029L3.37765 27.805C3.2356 28.5464 3.72265 29.25 4.37824 29.25H7.97383C8.62942 29.25 9.11736 28.5464 8.97442 27.805L7.38265 19.5029C8.33207 19.1206 9.00001 18.3198 9.00001 17.375C9.00001 16.5883 8.5156 15.9248 7.81501 15.4921C7.94648 15.1462 8.1503 14.8345 8.39471 14.5413L13.1127 15.8246L11.8235 24.5C11.8235 27.1236 19.4082 29.25 28.7647 29.25C38.1212 29.25 45.7059 27.1236 45.7059 24.5L44.4168 15.8246L54.5435 13.0703C56.0347 12.6651 57 11.5577 57 10.25C57 8.94227 56.0347 7.83492 54.5435 7.42895ZM42.8365 24.3412C41.8871 25.1821 37.0624 26.875 28.7647 26.875C20.4671 26.875 15.6424 25.1821 14.6929 24.3412L15.8479 16.5682L26.3691 19.4294C26.5985 19.4917 28.6385 20.1144 31.1612 19.4294L41.6824 16.5682L42.8365 24.3412ZM53.6718 10.8126L30.2894 17.1716C29.2915 17.4433 28.2379 17.4433 27.24 17.1716L11.7397 12.956L29.0241 10.2292C29.7909 10.109 30.2956 9.48852 30.1518 8.84356C30.0088 8.19785 29.2553 7.77555 28.5053 7.89578L10.5247 10.7309C9.4306 10.9031 8.4503 11.2987 7.60589 11.8316L3.85677 10.8118C3.16412 10.6226 3.19854 9.86629 3.85677 9.68742L27.2391 3.32836C28.5715 2.96617 29.6956 3.16731 30.2885 3.32836L53.6709 9.68742C54.323 9.86481 54.3688 10.6226 53.6718 10.8126Z" fill="#74C1ED"/>
+          </svg>
+          <div class="card-body mt-4 p-1">
+            <h5 class="card-title mb-4">Turmas</h5>
+            <p *ngIf="isLoadingTurma; else buildTurma" class="loader-button spinner spinner-blue"></p>
+            <ng-template #buildTurma class="text-end">
+              <p class="text-end">{{ qtdTurmas }}</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 cursor-pointer" (click)="redirecionar('/matriculas')">
+        <div class="card card-60w mx-auto p-3 card-menu-info bg-light-pink">
+          <svg width="34" height="35" viewBox="0 0 34 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_17_55)">
+              <path d="M4.64705 0H29.3529C31.6271 0 33.4706 1.46904 33.4706 3.28125V35L17 27.3438L0.529404 35V3.28125C0.529404 1.46904 2.37291 0 4.64705 0ZM3.2745 31.1915L17 24.8113L30.7255 31.1915V3.28125C30.7255 2.67818 30.1097 2.1875 29.3529 2.1875H4.64705C3.89026 2.1875 3.2745 2.67818 3.2745 3.28125V31.1915Z" fill="#EE95C5"/>
+            </g>
+            <defs>
+              <clipPath id="clip0_17_55">
+                <rect width="32.9412" height="35" fill="white" transform="matrix(-1 0 0 1 33.4706 0)"/>
+              </clipPath>
+            </defs>
+          </svg>
+          <div class="card-body mt-4 p-1">
+            <h5 class="card-title mb-4">Matrículas</h5>
+            <p *ngIf="isLoadingMatricula; else buildMatricula" class="loader-button spinner spinner-pink"></p>
+            <ng-template #buildMatricula class="text-end">
+              <p class="text-end">{{ qtdMatriculas }}</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
