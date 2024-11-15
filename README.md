@@ -107,3 +107,14 @@ Caso o back-end sirva em uma porta diferente da 8000, poderá tentar limpar qual
 </aside>
 
 # Links
+
+Link de referência 
+PHP - https://www.php.net/docs.php
+Link de referência 
+Laravel  - https://laravel.com/docs
+Link de referência 
+MySQL: https://dev.mysql.com/doc/
+Link de referência 
+Angular: https://angular.io/docs
+Link de referência 
+JWT (JSON Web Token): https://jwt.io/introduction
