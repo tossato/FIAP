@@ -69,6 +69,8 @@ curl -X POST http://127.0.0.1:8000/api/user \
 
 Lembrando que a senha tem que ter no mínimo 6 caracteres!!!
 
+Se esse comando não funcionar tente fazer pelo postman na rota http://127.0.0.1:8000/api/user com método POST e passando as requisições via body em formato json.
+
 Com esses passos finalizamos as configurações básicas para iniciar o projeto.
 
 ## - Inicialização dos projetos
